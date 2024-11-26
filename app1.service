@@ -1,0 +1,14 @@
+[Unit]
+Description=Gunicorn instance to serve py-microservice1-demo
+After=network.target
+
+[Service]
+User=${USER}
+Group=${USER}
+WorkingDirectory=/home/${USER}/pyapps/py_microservice1_demo
+Environment="PATH=/home/${USER}/pyapps/py_microservice1_demo/py_microservice1_demo_env/bin"
+ExecStart=/home/${USER}/pyapps/py_microservice1_demo/py_microservice1_demo_env/bin/gunicorn --workers 3 --bind unix:py_microservice1_demo.sock -m 007 wsgi:app
+
+[Install]
+WantedBy=multi-user.target
+
